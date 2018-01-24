@@ -1,3 +1,12 @@
+/*
+   This file is licensed under the Apache License, Version 2.0 (the "License").
+   You may not use this file except in compliance with the License.
+
+   This file is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR
+   CONDITIONS OF ANY KIND, either express or implied. See the License for the
+   specific language governing permissions and limitations under the License.
+*/
+
 package main
 
 import (
@@ -20,7 +29,7 @@ func main() {
 	path := os.Args[2]
 
 	if !strings.HasPrefix(path, "s3://") {
-		exitErrorf("Expecting a path like s3://<bucket>/<object>")
+		exitErrorf("Expecting a path like s3://<bucket>/<key>")
 		os.Exit(1)
 	}
 
@@ -61,6 +70,7 @@ func main() {
 }
 
 func exitErrorf(msg string, args ...interface{}) {
+	fmt.Fprintf(os.Stderr, "\nUsage: s3grabber <region> s3://<bucket>/<key> <destination>\n\n")
 	fmt.Fprintf(os.Stderr, msg+"\n", args...)
 	os.Exit(1)
 }
