@@ -27,6 +27,7 @@ func main() {
 
 	region := os.Args[1]
 	path := os.Args[2]
+	dest := os.Args[3]
 
 	if !strings.HasPrefix(path, "s3://") {
 		exitErrorf("Expecting a path like s3://<bucket>/<key>")
@@ -44,7 +45,7 @@ func main() {
 	bucket := parts[0]
 	object := parts[1]
 
-	file, err := os.Create(object)
+	file, err := os.Create(dest)
 	if err != nil {
 		exitErrorf("Unable to open file %q, %v", file, err)
 	}
